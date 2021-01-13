@@ -1,5 +1,6 @@
 <?php 
 include('classes/DB.php');
+include('classes/Login.php');
 include('classes/user.php');
 User::signin();
 ?>
@@ -16,6 +17,11 @@ User::signin();
     <title>Signin</title>
 </head>
 <body>
+<?php
+    if(isset($_GET['word'])){
+        echo "Please sign in to continue";
+    }
+?>
 <h1>Sign In</h1>
     <!-- Regular form inputs  -->
     <form action="signin.php" method="POST">
@@ -27,6 +33,7 @@ User::signin();
         <br>
         <br>
         <input type="submit" name="signin" value="Signin">
+        <a href="./signup.php">Sign Up</a>
     </form>
 </body>
 </html>

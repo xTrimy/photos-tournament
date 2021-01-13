@@ -1,7 +1,6 @@
 <?php
     session_start();
     if(!isset($_SESSION['images'])){
-
         $_SESSION['selected_image'] = [];
         $_SESSION['selected_image'][0] = [];
         $_SESSION['selected_image'][1] = [];

@@ -72,3 +72,23 @@ form input[type=submit] {
     border: 5px solid green;
 }
 
+table td img {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+table, td, th {
+    border: 1px solid black;
+    text-align: center;
+}
+  
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
