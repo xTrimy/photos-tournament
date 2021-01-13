@@ -31,8 +31,6 @@ session_start();
                 } else {
                     images[1].style.display = "none";
                 }
-
-
             }
         };
         xhttp.open("GET", "functions/getImage.php", true);
