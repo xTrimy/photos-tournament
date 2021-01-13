@@ -8,12 +8,20 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link To Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link To CSS File  -->
+    <link rel="stylesheet" href="layout/css/main.css">
     <title>Photos tournament</title>
 </head>
 
 <body data-round="1" data-stage="1">
-    <img class="image" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
-    <img class="image" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
+    <div class="img-view">
+    <h1>Choose one from the images below</h1>
+        <img class="image img111" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
+        <img class="image img222" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
+    </div>
 </body>
 
 <script>
