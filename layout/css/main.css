@@ -43,3 +43,52 @@ form input[type=submit] {
     margin: 0;
     cursor: pointer;
 }
+
+.img-view {
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+    align-items: center;
+}
+
+.img-view img {
+    width: 350px;
+    height: 350px;
+    margin: 20px;
+    transition: .5s all;
+    cursor: pointer;
+}
+
+.img-view img:hover {
+    width: 370px;
+    height: 370px;
+}
+
+.img-view .img111 {
+    border: 5px solid red;
+}
+
+.img-view .img222 {
+    border: 5px solid green;
+}
+
+table td img {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+table, td, th {
+    border: 1px solid black;
+    text-align: center;
+}
+  
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+

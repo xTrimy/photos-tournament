@@ -17,10 +17,16 @@ $history = DB::query('SELECT * FROM history WHERE user_id=:id', array(':id' => $
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link To Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link To CSS File  -->
+    <link rel="stylesheet" href="layout/css/main.css">
     <title>User History</title>
 </head>
 
 <body>
+<h1>My History</h1>
     <table>
         <tr>
             <th>#</th>
@@ -32,7 +38,7 @@ $history = DB::query('SELECT * FROM history WHERE user_id=:id', array(':id' => $
                 ?>
                 <tr>
                 <td><?php echo $i; ?></td>
-                <td><img src="<?php echo $h['image_url']; ?>"></td>
+                <td><a href="<?php echo $h['image_url']; ?>" target="_blank"><img src="<?php echo $h['image_url']; ?>"></a></td>
                 </tr>
                 <?php
                 $i++;
