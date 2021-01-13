@@ -1,7 +1,11 @@
 <?php
 session_start();
+include('classes/DB.php');
+include('classes/Login.php');
+if(!Login::isLoggedIn()){
+    header('Location: ./signin.php?word' );
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,8 +16,8 @@ session_start();
 </head>
 
 <body data-round="1" data-stage="1">
-    <img class="image" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
-    <img class="image" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
+    <img class="image" src="">
+    <img class="image" src="">
 </body>
 
 <script>
