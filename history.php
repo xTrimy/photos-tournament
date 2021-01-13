@@ -1,15 +1,17 @@
 <?php
 include('classes/DB.php');
 include('classes/Login.php');
+$history = "";
+if (isset($_GET['u'])) {
+    $u_id = $_GET['u'];
+    if (!DB::query('SELECT 1 FROM users WHERE id=:id', array(':id' => $u_id))) {
+        die('User not found');
+    }
+    $history = DB::query('SELECT * FROM history, users WHERE history.user_id = users.id AND user_id=:id ORDER BY history.ID DESC', array(':id' => $u_id));
+} else {
+    $history = DB::query('SELECT * FROM history, users WHERE history.user_id = users.id ORDER BY history.ID DESC');
+}
 
-if (!isset($_GET['u'])) {
-    die('User not found');
-}
-$u_id = $_GET['u'];
-if (!DB::query('SELECT 1 FROM users WHERE id=:id', array(':id' => $u_id))) {
-    die('User not found');
-}
-$history = DB::query('SELECT * FROM history WHERE user_id=:id', array(':id' => $u_id));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,23 +28,34 @@ $history = DB::query('SELECT * FROM history WHERE user_id=:id', array(':id' => $
 </head>
 
 <body>
-<h1>My History</h1>
+    <h1>My History</h1>
+    <?php
+    if (isset($_GET['u'])) {
+    ?>
+        <a style="text-align:center;display:block;" href="?">View all user's history</a>
+    <?php
+    }
+    ?>
     <table>
         <tr>
             <th>#</th>
+            <th>Username</th>
             <th>Image</th>
+            <th>Time</th>
         </tr>
         <?php
-            $i=1;
-            foreach($history as $h){
-                ?>
-                <tr>
+        $i = 1;
+        foreach ($history as $h) {
+        ?>
+            <tr>
                 <td><?php echo $i; ?></td>
+                <td><?php echo $h['name']; ?></td>
                 <td><a href="<?php echo $h['image_url']; ?>" target="_blank"><img src="<?php echo $h['image_url']; ?>"></a></td>
-                </tr>
-                <?php
-                $i++;
-            }
+                <td><?php echo $h['win_time']; ?></td>
+            </tr>
+        <?php
+            $i++;
+        }
         ?>
     </table>
 </body>

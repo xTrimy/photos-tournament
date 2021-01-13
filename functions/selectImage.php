@@ -13,9 +13,10 @@
         if($_SESSION['round'] == 1 && $_SESSION['stage'] == 4){
             $_SESSION['winner'] = $image;
             // Add the winner image to the history of the user
-            DB::query('INSERT INTO history VALUES (\'\',:user_id,:image_url)',array(':user_id'=>Login::isLoggedIn(), ':image_url'=>$image));
+            $timenow = date('Y-m-d H:i:s');
+            DB::query('INSERT INTO history VALUES (\'\',:user_id,:image_url,:_date)',array(':user_id'=>Login::isLoggedIn(), ':image_url'=>$image,':_date'=> $timenow));
         }
-        
+
         // If stage 3 end
         else if( $_SESSION['round'] == 2 && $_SESSION['stage'] == 3){
           $_SESSION['stage']++;
