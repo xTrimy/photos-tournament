@@ -2,8 +2,8 @@
 session_start();
 include('classes/DB.php');
 include('classes/Login.php');
-if(!Login::isLoggedIn()){
-    header('Location: ./signin.php?word' );
+if (!Login::isLoggedIn()) {
+    header('Location: ./signin.php?word');
 }
 ?>
 <!DOCTYPE html>
@@ -16,8 +16,13 @@ if(!Login::isLoggedIn()){
 </head>
 
 <body data-round="1" data-stage="1">
+    <h1 id="winner-text" style="display:none;">Winner</h1>
     <img class="image" src="">
     <img class="image" src="">
+    <div id="winner-button" style="display:none;">
+        <a href="./new.php">Start new tournament</a><br>
+        <a href="./history.php?u=<?php echo Login::isLoggedIn();?>">View my history</a>
+    </div>
 </body>
 
 <script>
@@ -33,6 +38,9 @@ if(!Login::isLoggedIn()){
                 if (myImages[1] != null) {
                     images[1].setAttribute('src', myImages[1]);
                 } else {
+                    images[0].classList.add('winner');
+                    document.getElementById('winner-text').style.display = "block";
+                    document.getElementById('winner-button').style.display = "block";
                     images[1].style.display = "none";
                 }
             }
@@ -48,22 +56,25 @@ if(!Login::isLoggedIn()){
     for (let i = 0; i < images.length; i++) {
         let myImage = images[i];
         myImage.addEventListener('click', function() {
-            myImage.classList.add('selected');
-            let imageId = myImage.getAttribute('src');
-            var currentRound = document.body.getAttribute('data-round');
-            var currentStage = document.body.getAttribute('data-stage');
-            var xhttp = new XMLHttpRequest();
-            var data = new FormData();
-            data.append('image', imageId);
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    getImages();
-                    console.log(this.responseText);
-                }
-            };
-            xhttp.open("POST", "functions/selectImage.php", true);
-            xhttp.send(data);
+            if (!myImage.classList.contains('winner')) {
+                let imageId = myImage.getAttribute('src');
+                var currentRound = document.body.getAttribute('data-round');
+                var currentStage = document.body.getAttribute('data-stage');
+                var xhttp = new XMLHttpRequest();
+                var data = new FormData();
+                data.append('image', imageId);
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        getImages();
+                        console.log(this.responseText);
+                    }
+                };
+                xhttp.open("POST", "functions/selectImage.php", true);
+                xhttp.send(data);
+            }
+
         });
+
     }
 </script>
 
