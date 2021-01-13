@@ -22,15 +22,16 @@ if (!Login::isLoggedIn()) {
 
 <body data-round="1" data-stage="1">
     <div class="img-view">
-    <h1>Choose one from the images below</h1>
-        
-    <h1 id="winner-text" style="display:none;">Winner</h1>
-    <img class="image img111" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
-    <img class="image img222" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
-    <div id="winner-button" style="display:none;">
-        <a href="./new.php">Start new tournament</a><br>
-        <a href="./history.php?u=<?php echo Login::isLoggedIn(); ?>">View my history</a>
-    </div>
+        <h1 style="color:red" id="error-msg"></h1>
+        <h1>Choose one from the images below</h1>
+
+        <h1 id="winner-text" style="display:none;">Winner</h1>
+        <img class="image img111" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
+        <img class="image img222" src="https://photo-voting.hiring.ipums.org/images/083.jpg">
+        <div id="winner-button" style="display:none;">
+            <a href="./new.php">Start new tournament</a><br>
+            <a href="./history.php?u=<?php echo Login::isLoggedIn(); ?>">View my history</a>
+        </div>
 </body>
 
 <script>
@@ -43,7 +44,6 @@ if (!Login::isLoggedIn()) {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var myImages = JSON.parse(this.responseText);
-
                 // Display the images in the array fetched from getImage.php
                 images[0].setAttribute('src', myImages[0]);
                 if (myImages[1] != null) { // If no winning image
@@ -54,6 +54,8 @@ if (!Login::isLoggedIn()) {
                     document.getElementById('winner-button').style.display = "block";
                     images[1].style.display = "none";
                 }
+            } else if (this.status != 200) {
+                document.getElementById('error-msg').innerHTML = this.responseText;
             }
         };
         xhttp.open("GET", "functions/getImage.php", true);

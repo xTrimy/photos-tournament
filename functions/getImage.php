@@ -15,11 +15,27 @@
         $_SESSION['stage'] = 1; 
 
         // Getting the object from the web server then extracting the images array from it
-        $json = file_get_contents('https://photo-voting.hiring.ipums.org/images/');
+        try{
+            $json = @file_get_contents('https://photo-voting.hiring.ipums.org/images/');
+        }catch(Exception  $e){
+            http_response_code(500);
+            echo $e->getMessage();
+            exit;
+        }
+        if(!$json){
+            http_response_code(404);
+            echo "404 Not Found";
+            exit;
+        }
         $myImages = json_decode($json);
-
         // Saving fetched images into session array
-        $_SESSION['images'] = $myImages->data;
+        if($myImages->code == 200){
+            $_SESSION['images'] = $myImages->data;
+        }else{
+           http_response_code($myImages->code);
+           echo $myImages->status . ": " . $myImages->code;
+           exit;
+        }
     }
 
     // Array for displaying images of rounds per stage
