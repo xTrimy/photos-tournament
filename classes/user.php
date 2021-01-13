@@ -55,7 +55,7 @@ class User
         }
     }   
 
-    // Signin method to compare user data and log him in 
+    // Signin method to compare user data and log them in 
     public static function signin()
     {
         if (isset($_POST['signin']))
